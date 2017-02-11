@@ -146,7 +146,7 @@ def main():
     # logger setup
     if args.evaluation:
         logging.basicConfig(filename='%s/hidden%d_bptt%d_lr%f_batch%d'
-                                     '_epoch%d_rnnlm.eval'
+                                     '_epoch%d_rnnlm_eval.log'
                                      % (args.out,
                                         args.unit,
                                         args.bproplen,
@@ -346,23 +346,13 @@ def main():
         # Save the model and the optimizer
         logger.info('Save the model')
         chainer.serializers.save_npz(
-            'rnnlm.model'
-            .format(args.out,
-                    args.unit,
-                    args.bproplen,
-                    args.lr,
-                    args.batchsize,
-                    args.epoch),
+            '{}/rnnlm.model'
+            .format(args.out),
             model)
         logger.info('Save the optimizer')
         chainer.serializers.save_npz(
-            'rnnlm.opt'
-            .format(args.out,
-                    args.unit,
-                    args.bproplen,
-                    args.lr,
-                    args.batchsize,
-                    args.epoch),
+            '{}/rnnlm.opt'
+            .format(args.out),
             optimizer)
 
     # Evaluate on test dataset
